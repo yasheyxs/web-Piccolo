@@ -1,0 +1,45 @@
+/* Estilo para los login y registro */
+.form {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.form input {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+}
+
+.form button {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--yellow);
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form button:hover {
+    background-color: #FFAC30;
+}
+
+#register-firstname, #register-lastname {
+    text-transform: capitalize;
+}
