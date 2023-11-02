@@ -4,24 +4,17 @@
     <meta charset="UTF-8">
     <title>Piccolo Burgers</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../scss/output.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap">    
 </head>
 <body>
     <header>
         <a href="../html/privatehome.html" class="logo"><img src="../imgs/image.webp" alt="icono piccolo">Piccolo</a>
-        <div id="menu-bar" class="fas fa-bars"></div>
         <nav class="navbar">
             <a href="../html/privatehome.html">Inicio</a>
-            <div class="dropdown">
-                <a href="../html/productos.html">Productos <i class="fas fa-caret-down"></i></a>
-                <div class="dropdown-content">
-                    <a href="../html/productos.html#hamburguesas">Hamburguesas</a>
-                    <a href="../html/productos.html#empanadas">Empanadas</a>
-                    <a href="../html/productos.html#bebidas">Bebidas</a>
-                </div>
-            </div>
-            <a href="../html/loginregister.html" id="logout">Cerrar sesión</a>
+            <a href="../html/productos.html">Productos</a>
+            <a href="../html/privatehome.html#contacto">Contacto</a>
+            <a href="../html/index.html" id="logout">Cerrar sesión</a>
         </nav>
     </header>
 
@@ -36,7 +29,7 @@
         </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" id="contacto">
         <section>
             <div class="share">
                 <a href="#" class="btn">Facebook</a>
@@ -50,5 +43,6 @@
     </footer>
 
     <script src="../script.js"></script>
+    <script src="../struct.js"></script>
 </body>
 </html>
