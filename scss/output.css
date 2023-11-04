@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   font-family: "Nunito", sans-serif;
   margin: 0;
@@ -145,12 +146,23 @@ header .navbar a:hover {
   color: #fff;
 }
 
-@media (max-width: 991px) {
+@media screen and (max-width: 768px) {
+  /* Estilos para tamaños de pantalla sm (hasta 768px) */
   html {
-    font-size: 55%;
+    font-size: 50%;
+  }
+  .order .row form .inputBox input {
+    width: 100%;
+  }
+  .heading {
+    font-size: 3rem;
+  }
+  .steps .box h3 {
+    font-size: 2.5rem;
   }
 }
-@media (max-width: 768px) {
+@media screen and (min-width: 1360px) and (max-width: 1919px) {
+  /* Estilos para tamaños de pantalla md (1360px a 1919px) */
   #menu-bar {
     display: initial;
   }
@@ -178,18 +190,10 @@ header .navbar a:hover {
     font-size: 3.5rem;
   }
 }
-@media (max-width: 450px) {
+@media screen and (min-width: 1920px) {
+  /* Estilos para tamaños de pantalla xxl (1920px y superior) */
   html {
-    font-size: 50%;
-  }
-  .order .row form .inputBox input {
-    width: 100%;
-  }
-  .heading {
-    font-size: 3rem;
-  }
-  .steps .box h3 {
-    font-size: 2.5rem;
+    font-size: 55%;
   }
 }
 .form {
@@ -264,53 +268,52 @@ header .navbar a:hover {
   color: #fff;
 }
 
-.home{
+.home {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   min-height: 100vh;
   align-items: center;
-  background:url(../imgs/bgburger.png) no-repeat;
+  background: url(../imgs/bgburger.png) no-repeat;
   background-size: cover;
   background-position: center;
 }
 
-.home .content{
+.home .content {
   flex: 1 1 40rem;
   padding-top: 6.5rem;
 }
 
-.home .image{
+.home .image {
   flex: 1 1 40rem;
 }
 
-.home .image img{
+.home .image img {
   width: 100%;
   padding: 1rem;
   animation: float 3s linear infinite;
 }
 
 @keyframes float {
-  0%, 100%{
-      transform: translateY(0rem);
+  0%, 100% {
+    transform: translateY(0rem);
   }
-  50%{
-      transform: translateY(3rem);
+  50% {
+    transform: translateY(3rem);
   }
 }
-
 .home .content h3,
 .home .content p {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 1rem;
 }
 
-.home .content h3{
+.home .content h3 {
   font-size: 5rem;
   color: #333;
 }
 
-.home .content p{
+.home .content p {
   font-size: 1.7rem;
   color: #666;
   padding: 1rem 0;
@@ -330,7 +333,7 @@ section .heading span {
   color: #FAC30C;
 }
 section .nosotros p {
-  font-size: 1.7rem;
+  font-size: 1, 7rem;
   color: #666;
   padding: 0rem 6rem;
   text-align: center;
@@ -359,7 +362,7 @@ section .nosotros p {
   color: #FAC30C;
 }
 
-input[type="number"] {
+input[type=number] {
   text-align: center;
   font-size: 2rem;
   border: none;
@@ -367,8 +370,8 @@ input[type="number"] {
   color: #FAC30C;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -397,5 +400,8 @@ button {
   align-items: center;
 }
 
-.comidas .box-container .box:hover .container button, .comidas .box-container .box:hover .container input[type="number"] {
-  background-color: rgba(0, 0, 0, 0.1);}
+.comidas .box-container .box:hover .container button, .comidas .box-container .box:hover .container input[type=number] {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*# sourceMappingURL=output.css.map */
