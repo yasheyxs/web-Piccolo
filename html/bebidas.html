@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Piccolo Burgers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="../scss/output.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap">    
+</head>
+<body>
+    <header>
+        <a href="../html/privatehome.html" class="logo"><img src="../imgs/image.webp" alt="icono piccolo">Piccolo</a>
+        <div class="navbar"></div> 
+    </header>
+
+    <section class="comidas" id="comidas">
+        <h1 class="heading"> Te ofrecemos nuestras <span>bebidas</span> </h1>
+        <div class="box-container">
+            <!-- Bebida 1 -->
+            <div class="box" id="bebida-1">
+                <span class="price"> $1000 </span>
+                <img src="../imgs/sprite.webp" alt="">
+                <h3> Sprite </h3>
+                <p>La clásica, la más refrescante</p>
+                <a href="#" class="btn">Pídela ahora</a>
+                <div class="container">
+                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-9" readonly>
+                    <button class="increment" onclick="stepper(this)"> + </button>
+                </div>
+            </div>
+            
+            <!-- Bebida 2 -->
+            <div class="box" id="bebida-2">
+                <span class="price"> $1000 </span>
+                <img src="../imgs/cocacola.webp" alt="">
+                <h3> Coca Cola </h3>
+                <p>La clásica, la más refrescante</p>
+                <a href="#" class="btn">Pídela ahora</a>
+                <div class="container">
+                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-10" readonly>
+                    <button class="increment" onclick="stepper(this)"> + </button>
+                </div>
+            </div>
+            
+            <!-- Bebida 3 -->
+            <div class="box" id="bebida-3">
+                <span class="price"> $1000 </span>
+                <img src="../imgs/fanta.webp" alt="">
+                <h3> Fanta </h3>
+                <p>La clásica, la más refrescante</p>
+                <a href="#" class="btn">Pídela ahora</a>
+                <div class="container">
+                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-11" readonly>
+                    <button class="increment" onclick="stepper(this)"> + </button>
+                </div>
+            </div>
+            
+            <!-- Bebida 4 -->
+            <div class="box" id="bebida-4">
+                <span class="price"> $1500 </span>
+                <img src="../imgs/cerveza.webp" alt="">
+                <h3> Cerveza </h3>
+                <p>Deliciosa cerveza artesanal</p>
+                <a href="#" class="btn">Pídela ahora</a>
+                <div class="container">
+                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-12" readonly>
+                    <button class="increment" onclick="stepper(this)"> + </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contacto">
+        <section>
+            <div class="share">
+                <a href="#" class="btn">Facebook</a>
+                <a href="#" class="btn">Twitter</a>
+                <a href="#" class="btn">Instagram</a>
+                <a href="#" class="btn">Pinterest</a>
+                <a href="#" class="btn">Linkedin</a>
+            </div>
+            <h1 class="credit"> Creado por <span> Jazmin Abigail Gaido</span></h1>
+        </section>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="../indexStruct.js"></script>
+</body>
+</html>
