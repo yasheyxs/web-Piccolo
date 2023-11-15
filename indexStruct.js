@@ -5,7 +5,11 @@ const contenedor = document.querySelector('.navbar-container');
 const menuItems = [
     { text: 'Inicio', path: '../html/privatehome.html' },
     { text: 'Productos', path: '../html/productos.html' },
+    { text: 'Hamburguesas', path: '../html/burger.html' },
+    { text: 'Empanadas', path: '../html/empanadas.html' },
+    { text: 'Bebidas', path: '../html/bebidas.html' },
     { text: 'Contacto', path: '../html/privatehome.html#contacto' },
+    { text: 'Carrito', path: '../html/agregar.html' },
     { text: 'Cerrar sesión', path: '../index.html', id: 'logout-button' }
 ];
 

@@ -14,7 +14,7 @@
     </header>
 
     <section class="comidas" id="comidas">
-        <h1 class="heading"> Te ofrecemos nuestras <span>hamburguesas</span> </h1>
+        <h1 class="heading"> Te ofrecemos nuestras <span>especialidades</span> </h1>
         <div class="box-container">
             <!-- Hamburguesa 1 -->
             <div class="box" id="hamburguesa-1">
@@ -24,9 +24,9 @@
                 <p>Esta delicia contiene carne, queso tybo, tomate, lechuga, pepinillos y mayonesa</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-1'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-1" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-1'), true)"> + </button>
                 </div>
             </div>
             
@@ -38,9 +38,9 @@
                 <p>Esta delicia contiene doble carne, queso cheddar, panceta y la salsa de la casa</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-2'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-2" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-2'), true)"> + </button>
                 </div>
             </div>
             
@@ -52,9 +52,9 @@
                 <p>Esta delicia contiene pan negro, carne, queso tybo, tomate, lechuga y mayonesa</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-3'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-3" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-3'), true)"> + </button>
                 </div>
             </div>
             
@@ -66,9 +66,9 @@
                 <p>Esta delicia contiene carne, queso cheddar, panceta, tomate, lechuga y mayonesa</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-4'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-4" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-4'), true)"> + </button>
                 </div>
             </div>
         </div>

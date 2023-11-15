@@ -14,7 +14,7 @@
     </header>
 
     <section class="comidas" id="comidas">
-        <h1 class="heading"> Te ofrecemos nuestras <span>bebidas</span> </h1>
+        <h1 class="heading"> Te ofrecemos nuestras <span>especialidades</span> </h1>
         <div class="box-container">
             <!-- Bebida 1 -->
             <div class="box" id="bebida-1">
@@ -24,9 +24,9 @@
                 <p>La clásica, la más refrescante</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-9'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-9" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-9'), true)"> + </button>
                 </div>
             </div>
             
@@ -38,9 +38,9 @@
                 <p>La clásica, la más refrescante</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-10'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-10" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-10'), true)"> + </button>
                 </div>
             </div>
             
@@ -52,9 +52,9 @@
                 <p>La clásica, la más refrescante</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-11'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-11" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-11'), true)"> + </button>
                 </div>
             </div>
             
@@ -66,9 +66,9 @@
                 <p>Deliciosa cerveza artesanal</p>
                 <a href="#" class="btn">Pídela ahora</a>
                 <div class="container">
-                    <button class="decrement" onclick="stepper(this)"> - </button>
+                    <button class="decrement" onclick="stepper(document.getElementById('my-input-12'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-12" readonly>
-                    <button class="increment" onclick="stepper(this)"> + </button>
+                    <button class="increment" onclick="stepper(document.getElementById('my-input-12'), true)"> + </button>
                 </div>
             </div>
         </div>
