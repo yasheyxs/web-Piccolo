@@ -15,63 +15,7 @@
 
     <section class="comidas" id="comidas">
         <h1 class="heading"> Te ofrecemos nuestras <span>especialidades</span> </h1>
-        <div class="box-container">
-            <!-- Bebida 1 -->
-            <div class="box" id="bebida-1">
-                <span class="price"> $1000 </span>
-                <img src="../imgs/sprite.webp" alt="">
-                <h3> Sprite </h3>
-                <p>La clásica, la más refrescante</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-9'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-9" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-9'), true)"> + </button>
-                </div>
-            </div>
-            
-            <!-- Bebida 2 -->
-            <div class="box" id="bebida-2">
-                <span class="price"> $1000 </span>
-                <img src="../imgs/cocacola.webp" alt="">
-                <h3> Coca Cola </h3>
-                <p>La clásica, la más refrescante</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-10'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-10" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-10'), true)"> + </button>
-                </div>
-            </div>
-            
-            <!-- Bebida 3 -->
-            <div class="box" id="bebida-3">
-                <span class="price"> $1000 </span>
-                <img src="../imgs/fanta.webp" alt="">
-                <h3> Fanta </h3>
-                <p>La clásica, la más refrescante</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-11'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-11" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-11'), true)"> + </button>
-                </div>
-            </div>
-            
-            <!-- Bebida 4 -->
-            <div class="box" id="bebida-4">
-                <span class="price"> $1500 </span>
-                <img src="../imgs/cerveza.webp" alt="">
-                <h3> Cerveza </h3>
-                <p>Deliciosa cerveza artesanal</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-12'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-12" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-12'), true)"> + </button>
-                </div>
-            </div>
-        </div>
+        <div class="box-container" id="product-containerBebidas"></div>
     </section>
 
     <footer class="footer" id="contacto">

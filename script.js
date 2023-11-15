@@ -1,41 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetchProductData();
     const navbar = document.querySelector('.navbar');
-    const logoutButton = document.querySelector('.navbar');
 
-function redirectToLogin() {
+    function redirectToLogin() {
         window.location.href = '../html/loginregister.html';
-}
-
-navbar.addEventListener('click', (event) => {
-    if (event.target.id === 'logout-button') {
-        redirectToLogin();
     }
-});
 
-const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('register-form');
-
-if (loginForm) {
-    loginForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        var loggedIn = true;
-
-        if (loggedIn) {
+    navbar.addEventListener('click', (event) => {
+        if (event.target.id === 'logout-button') {
             redirectToLogin();
         }
     });
-}
 
-if (registerForm) {
-    registerForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        var registered = true;
-        if (registered) {
-            redirectToLogin();
-        }
-    });
-}
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            var loggedIn = true;
+
+            if (loggedIn) {
+                redirectToLogin();
+            }
+        });
+    }
+
+    if (registerForm) {
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            var registered = true;
+            if (registered) {
+                redirectToLogin();
+            }
+        });
+    }
 });
 
 function stepper(input, isIncrement) {
@@ -51,26 +49,38 @@ function stepper(input, isIncrement) {
     }
 }
 
-async function fetchProductData() {
-    try {
-        const response = await fetch('http://localhost:8080/PiccoloWebNew/productos.json');
-        const data = await response.json();
-        displayProducts(data.categories);
-    } catch (error) {
-        console.error('Error fetching product data:', error);
-    }
-}
+const productContainerHambur = document.getElementById('product-containerHambur');
+fetch('../productos.json')
+    .then(res => res.json())
+    .then(data => {
+        const hamburgers = data.categories.find(category => category.name === "Hamburguesas");
+        hamburgers.products.forEach(product => {
+            const card = document.createElement('div');
+            card.classList.add('box');
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <div class="price">${product.price} </div>
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <button onclick="addToCart(${product.id})">Añadir al carrito</button>
+            `;
+            productContainerHambur.appendChild(card);
+        });
+    })
+    .catch(error => console.error('Error fetching products:', error));
 
-function displayProducts(categories) {
-    const boxContainer = document.querySelector('.box-container');
-
-    categories.forEach(category => {
-        category.products.forEach(product => {
-            const box = document.createElement('div');
-            box.classList.add('box');
-            box.innerHTML = `
-                <span class="price">$${product.price}</span>
-                <img src="${product.image}" alt="">
+const productContainerBebidas = document.getElementById('product-containerBebidas');
+fetch('../productos.json')
+    .then(res => res.json())
+    .then(data => {
+        const bebidas = data.categories.find(category => category.name === "Bebidas");
+        bebidas.products.forEach(product => {
+            const card = document.createElement('div');
+            card.classList.add('box');
+            card.id = `bebida-${product.id}`;
+            card.innerHTML = `
+                <span class="price"> $${product.price}  </span>
+                <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
                 <a href="#" class="btn">Pídela ahora</a>
@@ -80,21 +90,23 @@ function displayProducts(categories) {
                     <button class="increment" onclick="stepper(document.getElementById('my-input-${product.id}'), true)"> + </button>
                 </div>
             `;
-            boxContainer.appendChild(box);
+            productContainerBebidas.appendChild(card);
         });
-    });
-}
+    })
+    .catch(error => console.error('Error fetching products:', error));
 
-function displayProducts(categories) {
-    const boxContainer = document.getElementById('product-container');
-
-    categories.forEach(category => {
-        category.products.forEach(product => {
-            const box = document.createElement('div');
-            box.classList.add('box');
-            box.innerHTML = `
-                <span class="price">$${product.price}</span>
-                <img src="${product.image}" alt="">
+const productContainerEmpa = document.getElementById('product-containerEmpa');
+fetch('../productos.json')
+    .then(res => res.json())
+    .then(data => {
+        const empanadas = data.categories.find(category => category.name === "Empanadas");
+        empanadas.products.forEach(product => {
+            const card = document.createElement('div');
+            card.classList.add('box');
+            card.id = `empanada-${product.id}`;
+            card.innerHTML = `
+                <span class="price"> $${product.price}  </span>
+                <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
                 <a href="#" class="btn">Pídela ahora</a>
@@ -104,7 +116,14 @@ function displayProducts(categories) {
                     <button class="increment" onclick="stepper(document.getElementById('my-input-${product.id}'), true)"> + </button>
                 </div>
             `;
-            boxContainer.appendChild(box);
+            productContainerEmpa.appendChild(card);
         });
-    });
+    })
+    .catch(error => console.error('Error fetching products:', error));
+
+
+
+
+function addToCart(productId) {
+    // Lógica para agregar productos al carrito
 }

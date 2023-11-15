@@ -15,63 +15,7 @@
 
     <section class="comidas" id="comidas">
         <h1 class="heading"> Te ofrecemos nuestras <span>especialidades</span> </h1>
-        <div class="box-container">
-            <!-- Empanada 1 -->
-            <div class="box" id="empanada-1">
-                <span class="price"> $300 </span>
-                <img src="../imgs/dulce.webp" alt="">
-                <h3> Empanada Dulce </h3>
-                <p>El sabor de la empanada dulce más casera (con pasas)</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-5'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-5" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-5'), true)"> + </button>
-                </div>
-            </div>
-            
-            <!-- Empanada 2 -->
-            <div class="box" id="empanada-2">
-                <span class="price"> $300 </span>
-                <img src="../imgs/salda.webp" alt="">
-                <h3> Empanada Salada </h3>
-                <p>El sabor de la empanada salada más casera</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-6'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-6" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-6'), true)"> + </button>
-                </div>
-            </div>
-            
-            <!-- Empanada 3 -->
-            <div class="box" id="empanada-3">
-                <span class="price"> $300 </span>
-                <img src="../imgs/arabe.webp" alt="">
-                <h3> Empanada Árabe </h3>
-                <p>El sabor de la empanada árabe más casera</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-7'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-7" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-7'), true)"> + </button>
-                </div>
-            </div>
-            
-            <!-- Empanada 4 -->
-            <div class="box" id="empanada-4">
-                <span class="price"> $300 </span>
-                <img src="../imgs/pollo.webp" alt="">
-                <h3> Empanada de Pollo </h3>
-                <p>El sabor de la empanada de pollo más casera</p>
-                <a href="#" class="btn">Pídela ahora</a>
-                <div class="container">
-                    <button class="decrement" onclick="stepper(document.getElementById('my-input-8'), false)"> - </button>
-                    <input type="number" value="0" min="0" max="20" step="1" id="my-input-8" readonly>
-                    <button class="increment" onclick="stepper(document.getElementById('my-input-8'), true)"> + </button>
-                </div>
-            </div>
-        </div>
+        <div class="box-container" id="product-containerEmpa"></div>
     </section>
 
     <footer class="footer" id="contacto">
