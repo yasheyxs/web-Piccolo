@@ -11,7 +11,7 @@
     <div class="content-container">
         <div id="login-form-container" class="form">
             <h2>Login</h2>
-            <form id="login-form" action="../html/privatehome.html" method="post">
+            <form id="login-form" onsubmit="handleLogin(event)">
                 <input type="email" id="login-email" placeholder="Email" required autocapitalize="off">
                 <input type="password" id="login-password" placeholder="Contraseña" required>
                 <button type="submit" id="login-button">Iniciar Sesión</button>
@@ -20,7 +20,7 @@
 
         <div id="register-form-container" class="form">
             <h2>Registro</h2>
-            <form id="register-form" action="../html/privatehome.html" method="post">
+            <form id="register-form" onsubmit="handleRegistration(event)">
                 <input type="text" id="register-firstname" placeholder="Nombre" required autocapitalize="on">
                 <input type="text" id="register-lastname" placeholder="Apellido" required autocapitalize="on">
                 <input type="email" id="register-email" placeholder="Email" required autocapitalize="off">
