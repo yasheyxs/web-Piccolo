@@ -9,20 +9,7 @@ function handleRegistration(event) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-function stepper(input, isIncrement) {
-    let min = parseInt(input.getAttribute("min"));
-    let max = parseInt(input.getAttribute("max"));
-    let step = parseInt(input.getAttribute("step"));
-    let val = parseInt(input.value);
-    let calcStep = isIncrement ? step : -step;
-    let newValue = val + calcStep;
-
-    if (newValue >= min && newValue <= max) {
-        input.value = newValue;
-    }
-}
-
-const productContainerHambur = document.getElementById('product-containerHambur');
+    const productContainerHambur = document.getElementById('productcontainerHambur');
 fetch('../productos.json')
     .then(res => res.json())
     .then(data => {
@@ -35,7 +22,7 @@ fetch('../productos.json')
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
-                <a href="#" class="btn">Pídela ahora</a>
+                <a class="btn">Pídela ahora</a>
                 <div class="container">
                     <button class="decrement" onclick="stepper(document.getElementById('my-input-${product.id}'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-${product.id}" readonly>
@@ -47,7 +34,7 @@ fetch('../productos.json')
     })
     .catch(error => console.error('Error fetching products:', error));
 
-const productContainerBebidas = document.getElementById('product-containerBebidas');
+const productContainerBebidas = document.getElementById('productcontainerBebidas');
 fetch('../productos.json')
     .then(res => res.json())
     .then(data => {
@@ -61,7 +48,7 @@ fetch('../productos.json')
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
-                <a href="#" class="btn">Pídela ahora</a>
+                <a class="btn">Pídela ahora</a>
                 <div class="container">
                     <button class="decrement" onclick="stepper(document.getElementById('my-input-${product.id}'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-${product.id}" readonly>
@@ -73,7 +60,7 @@ fetch('../productos.json')
     })
     .catch(error => console.error('Error fetching products:', error));
 
-const productContainerEmpa = document.getElementById('product-containerEmpa');
+const productContainerEmpa = document.getElementById('productcontainerEmpa');
 fetch('../productos.json')
     .then(res => res.json())
     .then(data => {
@@ -87,7 +74,7 @@ fetch('../productos.json')
                 <img src="${product.image}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>${product.description}</p>
-                <a href="#" class="btn">Pídela ahora</a>
+                <a class="btn">Pídela ahora</a>
                 <div class="container">
                     <button class="decrement" onclick="stepper(document.getElementById('my-input-${product.id}'), false)"> - </button>
                     <input type="number" value="0" min="0" max="20" step="1" id="my-input-${product.id}" readonly>
@@ -99,6 +86,20 @@ fetch('../productos.json')
     })
     .catch(error => console.error('Error fetching products:', error));
 });
+
+function stepper(input, isIncrement) {
+    let min = parseInt(input.getAttribute("min"));
+    let max = parseInt(input.getAttribute("max"));
+    let step = parseInt(input.getAttribute("step"));
+    let val = parseInt(input.value);
+    let calcStep = isIncrement ? step : -step;
+    let newValue = val + calcStep;
+
+    if (newValue >= min && newValue <= max) {
+        input.value = newValue;
+    }
+}
+
 
 /*     // Código del carrito
 let carrito = [];
