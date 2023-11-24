@@ -163,10 +163,13 @@ function updateCartUI() {
     if (cartContainer) {
         cartContainer.innerHTML = '';
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let total = 0;
         for (const item of cart) {
             const cartCard = createCartCard(item);
             cartContainer.appendChild(cartCard);
+            total += item.price * item.quantity;
         }
+        updateTotal(total);
     } else {
         console.error('Elemento con ID "carrito-container" no encontrado');
     }
@@ -178,7 +181,6 @@ function createCartCard(cartItem) {
     console.log('Price:', cartItem.price);
     console.log('Quantity:', cartItem.quantity);
     const totalPrice = !isNaN(cartItem.price) && !isNaN(cartItem.quantity) ? Math.abs(cartItem.price * cartItem.quantity) : 0;
-    updateTotal(totalPrice);
     console.log('Total Price:', totalPrice);
 
     cartCard.innerHTML = `
@@ -187,26 +189,38 @@ function createCartCard(cartItem) {
         <span class="price" style="font-size: 2rem;"> $${totalPrice.toFixed(2)}</span>
         <button class="remove-btn" onclick="removeFromCart(${cartItem.id})">Eliminar</button>
     `;
+    updateTotal(totalPrice);
     return cartCard;
 }
 
 function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const removedItem = cart.find(item => item.id === productId);
+    
     if (removedItem) {
         const removedItemTotal = removedItem.price * removedItem.quantity;
-        updateTotal(-removedItemTotal);
+        cart = cart.filter(item => item.id !== productId);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateTotalAndUI(cart);
     }
-    cart = cart.filter(item => item.id !== productId);
-    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function updateTotalAndUI(cart) {
+    const total = cart.length > 0 ? cart.reduce((acc, item) => acc + (item.price * item.quantity), 0) : 0;
+    updateTotal(total);
     updateCartUI();
 }
 
 function updateTotal(price) {
-    const totalContainer = document.getElementById('total-container');
-    if (totalContainer) {
-        const currentTotal = parseFloat(document.getElementById('total-price').innerText.replace('$', '')) || 0;
-        const newTotal = currentTotal + price;
-        document.getElementById('total-price').innerText = `$${newTotal.toFixed(2)}`;
+    const currentTotalElement = document.getElementById('total-price');
+    if (currentTotalElement) {
+        currentTotalElement.innerText = `$${price.toFixed(2)}`;
     }
+}
+
+function realizarCompra() {
+    alert("Gracias por tu compra!");
+    localStorage.removeItem('cart');
+    updateCartUI();
+    updateTotal(0);
 }
