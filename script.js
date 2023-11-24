@@ -112,30 +112,37 @@ function stepper(input, isIncrement) {
 
 //CARRITO
 
-function addToCart(productId) {
-    const product = getProductById(productId);
-    const quantity = parseInt(document.getElementById(`my-input-${productId}`).value);
+async function addToCart(productId) {
+    const product = await getProductById(productId);
+    const quantityInput = document.getElementById(`my-input-${productId}`);
+    const quantity = parseInt(quantityInput.value, 10);
+    console.log('Quantity:', quantity);
 
-    if (quantity > 0) {
+    if (!isNaN(quantity) && quantity > 0 && product) {
         const cartItem = { ...product, quantity };
         addToLocalStorageCart(cartItem);
-        updateCartUI();
+        const redirectUrl = '../html/carrito.html';
+        window.location.href = redirectUrl;
+    } else {
+        console.error('Cantidad inválida o producto no encontrado');
     }
 }
 
-function getProductById(productId) {
-    return fetch('../productos.json')
-        .then(res => res.json())
-        .then(data => {
-            for (const category of data.categories) {
-                const product = category.products.find(p => p.id === productId);
-                if (product) {
-                    return { ...product, category: category.name };
-                }
+async function getProductById(productId) {
+    try {
+        const response = await fetch('../productos.json');
+        const data = await response.json();
+        for (const category of data.categories) {
+            const product = category.products.find(p => p.id === productId);
+            if (product) {
+                return { ...product, category: category.name };
             }
-            return null;
-        })
-        .catch(error => console.error('Error fetching products:', error));
+        }
+        return null;
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        return null;
+    }
 }
 
 function addToLocalStorageCart(cartItem) {
@@ -153,25 +160,31 @@ function addToLocalStorageCart(cartItem) {
 
 function updateCartUI() {
     const cartContainer = document.getElementById('carrito-container');
-    cartContainer.innerHTML = '';
-
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    for (const item of cart) {
-        const cartCard = createCartCard(item);
-        cartContainer.appendChild(cartCard);
+    if (cartContainer) {
+        cartContainer.innerHTML = '';
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        for (const item of cart) {
+            const cartCard = createCartCard(item);
+            cartContainer.appendChild(cartCard);
+        }
+    } else {
+        console.error('Elemento con ID "carrito-container" no encontrado');
     }
 }
 
 function createCartCard(cartItem) {
     const cartCard = document.createElement('div');
     cartCard.classList.add('cart-box');
+    console.log('Price:', cartItem.price);
+    console.log('Quantity:', cartItem.quantity);
+    const totalPrice = !isNaN(cartItem.price) && !isNaN(cartItem.quantity) ? Math.abs(cartItem.price * cartItem.quantity) : 0;
+    updateTotal(totalPrice);
+    console.log('Total Price:', totalPrice);
+
     cartCard.innerHTML = `
-        <span class="price"> $${cartItem.price * cartItem.quantity} </span>
-        <img src="${cartItem.image}" alt="${cartItem.name}">
-        <h3>${cartItem.name}</h3>
-        <p>${cartItem.description}</p>
-        <p>Cantidad: ${cartItem.quantity}</p>
+        <h3 style="font-size: 2.5rem;">${cartItem.name}</h3>
+        <p style="font-size: 2rem;">Cantidad: ${cartItem.quantity}</p>
+        <span class="price" style="font-size: 2rem;"> $${totalPrice.toFixed(2)}</span>
         <button class="remove-btn" onclick="removeFromCart(${cartItem.id})">Eliminar</button>
     `;
     return cartCard;
@@ -179,7 +192,21 @@ function createCartCard(cartItem) {
 
 function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const removedItem = cart.find(item => item.id === productId);
+    if (removedItem) {
+        const removedItemTotal = removedItem.price * removedItem.quantity;
+        updateTotal(-removedItemTotal);
+    }
     cart = cart.filter(item => item.id !== productId);
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartUI();
+}
+
+function updateTotal(price) {
+    const totalContainer = document.getElementById('total-container');
+    if (totalContainer) {
+        const currentTotal = parseFloat(document.getElementById('total-price').innerText.replace('$', '')) || 0;
+        const newTotal = currentTotal + price;
+        document.getElementById('total-price').innerText = `$${newTotal.toFixed(2)}`;
+    }
 }
