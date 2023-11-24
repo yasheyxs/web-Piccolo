@@ -4,7 +4,7 @@ function handleLogin(event) {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
-    fetch('../PiccoloWebNew/user.json')
+    fetch('../user.json')
         .then(res => {
             if (!res.ok) {
                 throw new Error(`HTTP error! Status: ${res.status}`);
@@ -24,10 +24,6 @@ function handleLogin(event) {
         .catch(error => console.error('Error fetching user data:', error));
 }
 
-function isLoggedIn() {
-    return sessionStorage.getItem('user') !== null;
-}
-
 function handleRegistration(event) {
     event.preventDefault();
 
@@ -44,34 +40,62 @@ function handleRegistration(event) {
         password: password,
         birthdate: birthdate,
     };
+
     sessionStorage.setItem('user', JSON.stringify(user));
     window.location.href = '../html/privatehome.html';
 }
 
+function isLoggedIn() {
+    return sessionStorage.getItem('user') !== null;
+}
 
 function handleLogout() {
     sessionStorage.removeItem('user');
     window.location.href = '../html/loginregister.html';
 }
 
+function createCard(product) {
+    const card = document.createElement('div');
+    card.classList.add('box');
+    card.id = `${product.category.toLowerCase()}-${product.id}`;
+    card.innerHTML = `
+        <span class="price"> $${product.price} </span>
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <a class="btn" onclick="addToCart(${product.id})">Pídela ahora</a>
+        <div class="container">
+            <button class="decrement" onclick="stepper(document.getElementById('my-input-${product.id}'), false)"> - </button>
+            <input type="number" value="0" min="0" max="20" step="1" id="my-input-${product.id}" readonly>
+            <button class="increment" onclick="stepper(document.getElementById('my-input-${product.id}'), true)"> + </button>
+        </div>
+    `;
+    return card;
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const productContainers = {
-        'productcontainerHambur': 'Hamburguesas',
-        'productcontainerBebidas': 'Bebidas',
-        'productcontainerEmpa': 'Empanadas'
-    };
-    Object.entries(productContainers).forEach(([containerId, category]) => {
-        renderProducts(containerId, category);
-    });
-    renderNavbar();
-    document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('click', addToCart);
-    });
-    renderCart();
-});
+function renderProducts(container, category) {
+    const productContainer = document.getElementById(container);
 
+    if (productContainer) {
+        fetch('../productos.json')
+            .then(res => res.json())
+            .then(data => {
+                const products = data.categories.find(cat => cat.name === category);
 
+                if (products) {
+                    products.products.forEach(product => {
+                        const card = createCard({ ...product, category: category });
+                        productContainer.appendChild(card);
+                    });
+                } else {
+                    console.error(`Products not found for category: ${category}`);
+                }
+            })
+            .catch(error => console.error('Error fetching products:', error));
+    } else {
+        console.error(`Product container with id '${container}' not found`);
+    }
+}
 
 function stepper(input, isIncrement) {
     let min = parseInt(input.getAttribute("min"));
@@ -86,106 +110,76 @@ function stepper(input, isIncrement) {
     }
 }
 
-function createCard(product) {
-    const card = document.createElement('div');
-    card.classList.add('box');
-    card.id = `${product.category.toLowerCase()}-${product.id}`;
-    card.innerHTML = `
-        <span class="price"> $${product.price} </span>
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <a class="btn">Pídela ahora</a>
-        <div class="container">
-            <button class="decrement" onclick="stepper(document.getElementById('my-input-${product.id}'), false)"> - </button>
-            <input type="number" value="0" min="0" max="20" step="1" id="my-input-${product.id}" readonly>
-            <button class="increment" onclick="stepper(document.getElementById('my-input-${product.id}'), true)"> + </button>
-        </div>
-    `;
-    return card;
+//CARRITO
+
+function addToCart(productId) {
+    const product = getProductById(productId);
+    const quantity = parseInt(document.getElementById(`my-input-${productId}`).value);
+
+    if (quantity > 0) {
+        const cartItem = { ...product, quantity };
+        addToLocalStorageCart(cartItem);
+        updateCartUI();
+    }
 }
 
-function renderProducts(container, category) {
-    const productContainer = document.getElementById(container);
-    fetch('../PiccoloWebNew/productos.json')
+function getProductById(productId) {
+    return fetch('../productos.json')
         .then(res => res.json())
         .then(data => {
-            const products = data.categories.find(cat => cat.name === category);
-            products.products.forEach(product => {
-                const card = createCard({ ...product, category });
-                productContainer.appendChild(card);
-            });
+            for (const category of data.categories) {
+                const product = category.products.find(p => p.id === productId);
+                if (product) {
+                    return { ...product, category: category.name };
+                }
+            }
+            return null;
         })
         .catch(error => console.error('Error fetching products:', error));
 }
 
-
-function renderNavbar() {
-    const navbar = document.querySelector('.navbar');
-
-    if (navbar) {
-        navbar.innerHTML = '';
-        menuItems.forEach(item => {
-            const listItem = document.createElement('a');
-            listItem.href = item.path;
-            listItem.textContent = item.text;
-            listItem.id = item.id;
-            navbar.appendChild(listItem);
-        });
-    } else {
-        console.error('Navbar element not found');
-    }
-}
-
-function addToCart(event) {
-    const productId = event.target.parentElement.id.split('-')[1];
-    const product = getProductById(productId, data);
+function addToLocalStorageCart(cartItem) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.id === cartItem.id);
 
-    const existingProductIndex = cart.findIndex(item => item.id === product.id);
-
-    if (existingProductIndex !== -1) {
-        cart[existingProductIndex].quantity += 1;
+    if (existingItem) {
+        existingItem.quantity += cartItem.quantity;
     } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            quantity: 1,
-        });
+        cart.push(cartItem);
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
 }
 
-function getProductById(productId, data) {
-    const allProducts = data.categories.flatMap(category => category.products);
-    return allProducts.find(product => product.id === parseInt(productId));
-}
-
-function renderCart() {
+function updateCartUI() {
     const cartContainer = document.getElementById('carrito-container');
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     cartContainer.innerHTML = '';
 
-    cart.forEach(product => {
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <span class="cart-item-name">${product.name}</span>
-            <span class="cart-item-quantity">Cantidad: ${product.quantity}</span>
-            <span class="cart-item-price">Precio unitario: $${product.price}</span>
-            <span class="cart-item-total">Total: $${product.price * product.quantity}</span>
-            <button class="btn-remove" onclick="removeFromCart(${product.id})">Eliminar</button>
-        `;
-        cartContainer.appendChild(cartItem);
-    });
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    for (const item of cart) {
+        const cartCard = createCartCard(item);
+        cartContainer.appendChild(cartCard);
+    }
+}
+
+function createCartCard(cartItem) {
+    const cartCard = document.createElement('div');
+    cartCard.classList.add('cart-box');
+    cartCard.innerHTML = `
+        <span class="price"> $${cartItem.price * cartItem.quantity} </span>
+        <img src="${cartItem.image}" alt="${cartItem.name}">
+        <h3>${cartItem.name}</h3>
+        <p>${cartItem.description}</p>
+        <p>Cantidad: ${cartItem.quantity}</p>
+        <button class="remove-btn" onclick="removeFromCart(${cartItem.id})">Eliminar</button>
+    `;
+    return cartCard;
 }
 
 function removeFromCart(productId) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = cart.filter(item => item.id !== productId);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    renderCart();
+    cart = cart.filter(item => item.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartUI();
 }
