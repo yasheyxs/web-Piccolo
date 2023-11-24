@@ -1,7 +1,3 @@
-// Elimina el contenido inicial del navbar
-const contenedor = document.querySelector('.navbar-container');
-
-// Define una estructura de array de objetos para las rutas del navbar
 const menuItems = [
     { text: 'Inicio', path: '../html/privatehome.html' },
     { text: 'Hamburguesas', path: '../html/burger.html' },
@@ -9,7 +5,7 @@ const menuItems = [
     { text: 'Bebidas', path: '../html/bebidas.html' },
     { text: 'Contacto', path: '../html/privatehome.html#contacto' },
     { text: 'Carrito', path: '../html/carrito.html' },
-    { text: 'Cerrar sesión', path: '../index.html', id: 'logout-button' }
+    { text: 'Cerrar sesión', path: '#', id: 'logout-button', onclick: 'handleLogout()' }
 ];
 
 function fillNavbar() {
@@ -21,7 +17,12 @@ function fillNavbar() {
         listItem.href = item.path;
         listItem.textContent = item.text;
         listItem.id = item.id;
+        if (item.onclick) {
+            listItem.setAttribute('onclick', item.onclick);
+        }
+
         navbar.appendChild(listItem);
     });
 }
+
 document.addEventListener('DOMContentLoaded', fillNavbar);

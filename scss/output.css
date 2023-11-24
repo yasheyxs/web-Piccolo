@@ -400,4 +400,71 @@ button {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.carrito {
+  padding: 4rem 9%;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  text-align: center;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.carrito-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.producto-carrito {
+  width: 30%;
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border: 0.1rem solid rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  text-align: center;
+  padding: 1rem;
+}
+
+.producto-carrito img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.producto-carrito .info {
+  padding: 1rem;
+}
+
+.producto-carrito .info h3 {
+  color: #333;
+  font-size: 2rem;
+}
+
+.producto-carrito .info .price {
+  color: #FAC30C;
+  font-size: 1.8rem;
+}
+
+.btn-comprar {
+  margin-top: 2rem;
+  padding: 1.5rem 3rem;
+  font-size: 1.8rem;
+  background-color: #FAC30C;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-comprar:hover {
+  background-color: #FFAC30;
+}
+
 /*# sourceMappingURL=output.css.map */
