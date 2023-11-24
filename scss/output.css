@@ -443,12 +443,12 @@ button {
 
 .cart-box .info h3 {
   color: #333;
-  font-size: 3rem !important; /* Increase the font size for better visibility */
+  font-size: 3rem !important;
 }
 
 .cart-box .info .price {
   color: #FAC30C;
-  font-size: 3rem !important; /* Increase the font size for better visibility */
+  font-size: 3rem !important;
 }
 
 .btn-comprar {
