@@ -121,11 +121,21 @@ async function addToCart(productId) {
     if (!isNaN(quantity) && quantity > 0 && product) {
         const cartItem = { ...product, quantity };
         addToLocalStorageCart(cartItem);
-        const redirectUrl = '../html/carrito.html';
-        window.location.href = redirectUrl;
+        showNotification('Tu producto ha sido agregado al carrito de compras');
+        setTimeout(() => {
+            closeNotification();
+        }, 2000);
     } else {
         console.error('Cantidad inválida o producto no encontrado');
     }
+}
+
+function showNotification(message) {
+    alert(message);
+}
+
+function closeNotification() {
+    // la ventana emergente se cerrará automáticamente
 }
 
 async function getProductById(productId) {
@@ -160,35 +170,48 @@ function addToLocalStorageCart(cartItem) {
 
 function updateCartUI() {
     const cartContainer = document.getElementById('carrito-container');
-    if (cartContainer) {
+    const realizarCompraBtn = document.getElementById('realizar-compra-btn');
+    if (cartContainer && realizarCompraBtn) {
         cartContainer.innerHTML = '';
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         let total = 0;
+
         for (const item of cart) {
             const cartCard = createCartCard(item);
             cartContainer.appendChild(cartCard);
             total += item.price * item.quantity;
         }
+
         updateTotal(total);
+        
+        if (cart.length > 0) {
+            realizarCompraBtn.style.display = 'block';
+        } else {
+            realizarCompraBtn.style.display = 'none';
+        }
     } else {
-        console.error('Elemento con ID "carrito-container" no encontrado');
+        console.error('Elemento con ID "carrito-container" o "realizar-compra-btn" no encontrado');
     }
 }
 
 function createCartCard(cartItem) {
     const cartCard = document.createElement('div');
     cartCard.classList.add('cart-box');
-    console.log('Price:', cartItem.price);
-    console.log('Quantity:', cartItem.quantity);
+    const imgContainer = document.createElement('div');
+    imgContainer.classList.add('cart-img-container');
+    imgContainer.innerHTML = `<img src="${cartItem.image}" alt="${cartItem.name}">`;
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('cart-text-container');
     const totalPrice = !isNaN(cartItem.price) && !isNaN(cartItem.quantity) ? Math.abs(cartItem.price * cartItem.quantity) : 0;
-    console.log('Total Price:', totalPrice);
-
-    cartCard.innerHTML = `
+    textContainer.innerHTML = `
         <h3 style="font-size: 2.5rem;">${cartItem.name}</h3>
         <p style="font-size: 2rem;">Cantidad: ${cartItem.quantity}</p>
         <span class="price" style="font-size: 2rem;"> $${totalPrice.toFixed(2)}</span>
         <button class="remove-btn" onclick="removeFromCart(${cartItem.id})">Eliminar</button>
     `;
+    cartCard.appendChild(imgContainer);
+    cartCard.appendChild(textContainer);
+
     updateTotal(totalPrice);
     return cartCard;
 }
