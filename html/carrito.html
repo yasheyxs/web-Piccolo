@@ -22,6 +22,11 @@
         </div>
     </section>
 
+    <section class="comidas" id="comidas">
+        <h1 class="heading"> Acompañá tu pedido con un <span>postre</span> </h1>
+        <div class="box-container" id="productcontainerPostre"></div>
+    </section>
+
     <footer class="footer" id="contacto">
         <section>
             <div class="share">
@@ -37,6 +42,9 @@
 
     <script src="../indexStruct.js"></script>
     <script src="../script.js"></script>
+    <script>
+        renderProducts("productcontainerPostre", "Postres");
+    </script>
     <script>
         window.onload = function () {
             updateCartUI();

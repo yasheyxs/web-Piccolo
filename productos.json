@@ -98,6 +98,39 @@
                     "description": "Deliciosa cerveza artesanal"
                 }
             ]
+        },
+        {
+            "name": "Postres",
+            "products": [
+                {
+                    "id": 13,
+                    "name": "Cheesecake",
+                    "price": 1500,
+                    "image": "../imgs/torta.webp",
+                    "description": "Una porción del mejor cheesecake"
+                },
+                {
+                    "id": 14,
+                    "name": "Helado",
+                    "price": 700,
+                    "image": "../imgs/helado.webp",
+                    "description": "Una sabrosa bocha del mejor helado artesanal"
+                },
+                {
+                    "id": 15,
+                    "name": "Brownies",
+                    "price": 1000,
+                    "image": "../imgs/brownies.webp",
+                    "description": "Caseros, deliciosos y chocolatosos brownies"
+                },
+                {
+                    "id": 16,
+                    "name": "Tiramisú",
+                    "price": 1500,
+                    "image": "../imgs/tiramisu.webp",
+                    "description": "Clásico manjar para los amantes del sabor a café"
+                }
+            ]
         }
     ]
 }

@@ -125,6 +125,7 @@ async function addToCart(productId) {
         setTimeout(() => {
             closeNotification();
         }, 2000);
+        window.location.reload()
     } else {
         console.error('Cantidad inválida o producto no encontrado');
     }
